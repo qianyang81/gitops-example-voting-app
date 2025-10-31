@@ -14,9 +14,9 @@ RUN npm install -g nodemon
 COPY package-lock.json ./package-lock.json
 COPY package.json ./package.json
 
-RUN npm ci && \
- npm cache clean --force && \
- mv /usr/local/app/node_modules /node_modules
+RUN npm ci 
+RUN npm cache clean --force 
+RUN mv /usr/local/app/node_modules /node_modules
 
 COPY . .
 
