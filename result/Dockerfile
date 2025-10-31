@@ -5,12 +5,14 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends curl tini && \
     rm -rf /var/lib/apt/lists/*
 
+RUN mkdir -p /usr/local/app 
 WORKDIR /usr/local/app
 
 # have nodemon available for local dev use (file watching)
 RUN npm install -g nodemon
 
-COPY package*.json ./
+COPY package-lock.json ./package-lock.json
+COPY package.json ./package.json
 
 RUN npm ci && \
  npm cache clean --force && \
