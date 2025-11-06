@@ -19,6 +19,7 @@ env:
   ACR_NAME: gitopsdevacr        
   IMAGE_NAME: result          
   DOCKERFILE_PATH: result/Dockerfile
+  CONTEXT_PATH: result
 
 jobs:
   build-and-push:
@@ -28,16 +29,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+
       - name: Extract version from package.json
         id: get_version
         run: |
-          VERSION=$(jq -r .version result/package.json)
+          VERSION=$(jq -r .version ${CONTEXT_PATH}/package.json)
           echo "App version: $VERSION"
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Build Docker image
         run: |
-          docker build -f $DOCKERFILE_PATH -t $ACR_NAME.azurecr.io/$IMAGE_NAME:${{ steps.get_version.outputs.VERSION }} .
+          docker build -f $DOCKERFILE_PATH -t $ACR_NAME.azurecr.io/$IMAGE_NAME:${{ steps.get_version.outputs.VERSION }} ${CONTEXT_PATH}
 
       - name: Log in to Azure
         if: github.ref == 'refs/heads/master'
@@ -48,7 +50,7 @@ jobs:
 
       
       - name: Docker build and push to ACR
-        if: github.ref == 'refs/heads/master'
+        #if: github.ref == 'refs/heads/master'
         run: |
           az acr login --name $ACR_NAME
           docker push $ACR_NAME.azurecr.io/$IMAGE_NAME:$IMAGE_TAG
