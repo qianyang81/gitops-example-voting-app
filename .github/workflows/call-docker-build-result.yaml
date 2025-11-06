@@ -20,7 +20,7 @@ permissions:
   contents: read
 
 env:
-  ACR_NAME: gitopsdevacr        
+  ACR_NAME: gitopsacrdev       
   IMAGE_NAME: result          
   DOCKERFILE_PATH: result/Dockerfile
   CONTEXT_PATH: result
@@ -55,9 +55,9 @@ jobs:
           # this secret should contain JSON output from `az ad sp create-for-rbac`
 
       
-      #- name: Docker build and push to ACR
+      - name: Docker build and push to ACR
       #  #if: github.ref == 'refs/heads/master'
-      #  run: |
-      #    az acr login --name $ACR_NAME
-      #    docker push $ACR_NAME.azurecr.io/$IMAGE_NAME:$IMAGE_TAG
+        run: |
+          az acr login --name $ACR_NAME
+          docker push $ACR_NAME.azurecr.io/$IMAGE_NAME:$${{ steps.get_version.outputs.VERSION }}
 
