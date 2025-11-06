@@ -15,6 +15,10 @@ on:
       - 'result/**'
       - '.github/workflows/call-docker-build-result.yaml'
 
+permissions:
+  id-token: write
+  contents: read
+
 env:
   ACR_NAME: gitopsdevacr        
   IMAGE_NAME: result          
