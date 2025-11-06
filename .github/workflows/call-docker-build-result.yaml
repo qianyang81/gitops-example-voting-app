@@ -59,5 +59,6 @@ jobs:
       #  #if: github.ref == 'refs/heads/master'
         run: |
           az acr login --name $ACR_NAME
-          docker push $ACR_NAME.azurecr.io/$IMAGE_NAME:$${{ steps.get_version.outputs.VERSION }}
+          VERSION="${{ steps.get_version.outputs.VERSION }}"
+          docker push $ACR_NAME.azurecr.io/$IMAGE_NAME:$VERSION
 
