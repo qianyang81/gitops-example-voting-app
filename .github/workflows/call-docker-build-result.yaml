@@ -22,7 +22,7 @@ permissions:
   contents: read
 
 env:
-  ACR_NAME: gitopsacrdev       
+  ACR_NAME: gitopsdevacr      
   IMAGE_NAME: result          
   DOCKERFILE_PATH: result/Dockerfile
   CONTEXT_PATH: result
