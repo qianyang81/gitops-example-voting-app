@@ -1,3 +1,5 @@
+# FIXME: duplicated steps need to be modualized
+# FIXME: add test and some static code checking steps
 name: Build and Push Docker image to ACR (result)
 
 on:
