@@ -22,7 +22,7 @@ permissions:
   contents: read
 
 env:
-  ACR_NAME: gitopdevacr      
+  ACR_NAME: gitopsdevacr      
   IMAGE_NAME: vote         
   DOCKERFILE_PATH: vote/Dockerfile
   CONTEXT_PATH: vote
